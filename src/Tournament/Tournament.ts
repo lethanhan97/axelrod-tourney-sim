@@ -1,15 +1,23 @@
 export class Tournament {
   // TODO: make strategies type once we have interface
-  strategies: unknown[] = [];
-  rounds: number = 0;
+  private _strategies: unknown[] = [];
+  private _rounds: number = 0;
 
   constructor(strategies?: unknown[], rounds?: number) {
-    this.strategies = strategies || [];
+    this._strategies = strategies || [];
     rounds && this.setRounds(rounds);
   }
 
+  get rounds() {
+    return this._rounds;
+  }
+
+  get strategies() {
+    return this._strategies;
+  }
+
   addStrategy(strategy: unknown) {
-    this.strategies.push(strategy);
+    this._strategies.push(strategy);
   }
 
   setRounds(rounds: number) {
@@ -17,6 +25,6 @@ export class Tournament {
       throw new Error('There needs to be at least 1 round');
     }
 
-    this.rounds = rounds;
+    this._rounds = rounds;
   }
 }
