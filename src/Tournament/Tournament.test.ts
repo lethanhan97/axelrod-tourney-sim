@@ -1,5 +1,8 @@
 import { MockStrategy } from '../strategies/Mock';
+import { BattleOutcome } from '../strategies/types';
 import { Tournament } from './Tournament';
+
+const { COORPERATE, DEFECT } = BattleOutcome;
 
 describe(Tournament.name, () => {
   describe(Tournament.prototype.setRounds.name, () => {
@@ -27,6 +30,32 @@ describe(Tournament.name, () => {
       tournament.addStrategy(strategy);
       expect(tournament.strategies).toHaveLength(1);
       expect(tournament.strategies[0]).toBe(strategy);
+    });
+  });
+
+  describe(Tournament.prototype.judge.name, () => {
+    it.each([
+      [
+        [COORPERATE, DEFECT],
+        [0, 5],
+      ],
+      [
+        [COORPERATE, COORPERATE],
+        [3, 3],
+      ],
+      [
+        [DEFECT, COORPERATE],
+        [5, 0],
+      ],
+      [
+        [DEFECT, DEFECT],
+        [1, 1],
+      ],
+    ])('returns result correctly', (input, output) => {
+      const tournament = new Tournament();
+
+      const [outcomeA, outcomeB] = input;
+      expect(tournament.judge(outcomeA, outcomeB)).toEqual(output);
     });
   });
 });

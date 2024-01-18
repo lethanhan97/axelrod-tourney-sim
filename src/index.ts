@@ -2,12 +2,21 @@ import { Tournament } from './Tournament/Tournament';
 import { FriedmanStrategy } from './strategies/Friedman';
 import { PushoverStrategy } from './strategies/Pushover';
 import { RandomStrategy } from './strategies/Random';
+import { TitForTatStrategy } from './strategies/TitForTat';
 
-const tournament = new Tournament([], 20);
+const tournament = new Tournament([], 1000);
 
-const strategies = [FriedmanStrategy, RandomStrategy, PushoverStrategy];
+const strategies = [
+  FriedmanStrategy,
+  TitForTatStrategy,
+  RandomStrategy,
+  PushoverStrategy,
+];
+
 strategies.forEach((Strategy) => {
   tournament.addStrategy(new Strategy());
 });
 
-tournament.startTournament();
+const result = tournament.startTournament();
+
+console.log({ result });
