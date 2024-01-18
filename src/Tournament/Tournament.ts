@@ -1,9 +1,10 @@
+import { Strategy } from '../strategies/types';
+
 export class Tournament {
-  // TODO: make strategies type once we have interface
-  private _strategies: unknown[] = [];
+  private _strategies: Strategy[] = [];
   private _rounds: number = 0;
 
-  constructor(strategies?: unknown[], rounds?: number) {
+  constructor(strategies?: Strategy[], rounds?: number) {
     this._strategies = strategies || [];
     rounds && this.setRounds(rounds);
   }
@@ -16,7 +17,7 @@ export class Tournament {
     return this._strategies;
   }
 
-  addStrategy(strategy: unknown) {
+  addStrategy(strategy: Strategy) {
     this._strategies.push(strategy);
   }
 

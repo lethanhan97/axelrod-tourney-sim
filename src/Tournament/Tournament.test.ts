@@ -1,3 +1,4 @@
+import { MockStrategy } from '../strategies/Mock';
 import { Tournament } from './Tournament';
 
 describe(Tournament.name, () => {
@@ -21,7 +22,7 @@ describe(Tournament.name, () => {
   describe(Tournament.prototype.addStrategy.name, () => {
     it('add strategy correctly', () => {
       const tournament = new Tournament();
-      const strategy = { name: 'Tit for tat' };
+      const strategy = new MockStrategy();
 
       tournament.addStrategy(strategy);
       expect(tournament.strategies).toHaveLength(1);
